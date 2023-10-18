@@ -1,0 +1,9 @@
+GC
+PS2
+XB
+Wii
+PS3
+X360
+WiiU
+PS4
+XOne
