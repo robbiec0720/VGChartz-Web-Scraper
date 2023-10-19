@@ -7,6 +7,7 @@ def get_all_data(filename):
     game_list = open(filename, 'r')
     for game in game_list:
         all_data += get_game_data(game.strip())
+        print(f'{game.strip()} Done')
     game_list.close()
     return all_data
 
@@ -17,7 +18,7 @@ def get_game_data(game_name):
     
     # navigate to table
     soup = BeautifulSoup(search_results.text, 'lxml')
-    table = soup.find_all(id='generalBody')[0]
+    table = soup.find('div', {'id': 'generalBody'})
     rows = table.find_all('tr')[3:-1]
     
     data = [] # stores data
@@ -43,7 +44,9 @@ def get_genre(link):
     # retrieve webpage info and navigate to game info section
     game_page = requests.get(link)
     sub_soup = BeautifulSoup(game_page.text, "lxml")
-    gamebox = sub_soup.find("div", {"id": "gameGenInfoBox"})
+    gamebox = sub_soup.find('div', {'id': 'gameGenInfoBox'})
+    if gamebox is None:
+        return "N/A"
     h2s = gamebox.find_all('h2')
     
     # this info is not tagged so a manual search is necessary
@@ -55,7 +58,8 @@ def get_genre(link):
     # returns the genre
     return temp_tag.next_sibling.string
 
-# sales_data = get_all_data('game_list.txt')
-sales_data = get_game_data('Fallout 4')
+print('*****Extracting Sales Data*****')
+sales_data = get_all_data('game_list.txt')
 sales_df = pd.DataFrame(sales_data, columns=['Title', 'Genre', 'Console', 'Total Sales', 'NA Sales', 'PAL Sales', 'Japan Sales', 'Other Sales'])
-print(sales_df)
+sales_df.to_csv('sales_data.csv', sep=',', index=False, encoding='utf-8')
+print('******Extraction Finished******')
