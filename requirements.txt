@@ -3,5 +3,3 @@ lxml
 numpy
 pandas
 requests
-unidecode
-user_agent

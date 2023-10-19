@@ -55,6 +55,7 @@ def get_genre(link):
     # returns the genre
     return temp_tag.next_sibling.string
 
-sales_data = get_all_data('game_list.txt')
+# sales_data = get_all_data('game_list.txt')
+sales_data = get_game_data('Fallout 4')
 sales_df = pd.DataFrame(sales_data, columns=['Title', 'Genre', 'Console', 'Total Sales', 'NA Sales', 'PAL Sales', 'Japan Sales', 'Other Sales'])
 print(sales_df)
