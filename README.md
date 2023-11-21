@@ -13,3 +13,6 @@ This script cleans 'sales_data_raw.csv' by converting the sales data to be float
 
 ## sales_by_genre.py
 This scripts reads in the 'sales_data_clean.csv' file and sums up the sales data by each console/genre combination and exports it to a new file 'sales_by_genre.csv'.
+
+## top_10_sales.py
+This script reads in the 'sales_data_clean.csv' file and extracts the top 10 most sold games for each generation/genre combination and exports it to a new file 'top_10_sales.csv'.

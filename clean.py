@@ -1,7 +1,7 @@
 import pandas as pd
 
 def console_to_generation(console):
-    if console in ['GameCube', 'PlayStation2', 'Xbox']:
+    if console in ['GameCube', 'PlayStation 2', 'Xbox']:
         return 6
     elif console in ['Wii', 'PlayStation 3', 'Xbox 360']:
         return 7
@@ -23,6 +23,9 @@ console_names = {'GC' : 'GameCube',
                  'PS4' : 'PlayStation 4',
                  'XOne' : 'Xbox One'}
 sales_df['Console'] = sales_df['Console'].map(lambda c: console_names[c])
+
+# fix genre names
+sales_df['Genre'] = sales_df['Genre'].map(lambda g: g.replace('+', ' '))
 
 # remove 'm' from sales data
 sales_col = ['Total Sales', 'NA Sales', 'PAL Sales', 'Japan Sales', 'Other Sales']
